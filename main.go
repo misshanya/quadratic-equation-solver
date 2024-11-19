@@ -32,13 +32,13 @@ func main() {
 
 	a, b, c := args[0], args[1], args[2]
 
-	x1, x2 := solve(a, b, c)
+	result := solve(a, b, c)
 
-	switch {
-	case x1 != nil && x2 != nil:
-		fmt.Printf("X1: %v\nX2: %v\n", *x1, *x2)
-	case x1 != nil:
-		fmt.Printf("X: %v\n", *x1)
+	switch len(result) {
+	case 2:
+		fmt.Printf("X1: %v\nX2: %v\n", result[0], result[1])
+	case 1:
+		fmt.Printf("X: %v\n", result[0])
 	default:
 		fmt.Println("No roots")
 	}
