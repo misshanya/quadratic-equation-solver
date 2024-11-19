@@ -7,28 +7,16 @@ import (
 	"strconv"
 )
 
-type Number interface {
-	int | float64
-}
-
-func parseArgs(args []string) ([]int, error) {
-	var result []int
+func parseArgs(args []string) ([]float64, error) {
+	var result []float64
 	for _, arg := range args {
-		value, err := strconv.Atoi(arg)
+		value, err := strconv.ParseFloat(arg, 64)
 		if err != nil {
 			return nil, err
 		}
 		result = append(result, value)
 	}
 	return result, nil
-}
-
-func power[T Number](base, exponent T) T {
-	return T(math.Pow(float64(base), float64(exponent)))
-}
-
-func squareRoot[T Number](value T) T {
-	return T(math.Sqrt(float64(value)))
 }
 
 func main() {
@@ -57,12 +45,12 @@ func main() {
 	}
 }
 
-func solve[T Number](a, b, c T) (*T, *T) {
-	D := power(b, 2) - 4*a*c
+func solve(a, b, c float64) (*float64, *float64) {
+	D := math.Pow(b, 2) - 4*a*c
 	switch {
 	case D > 0:
-		x1 := (-b + squareRoot(D)) / (2 * a)
-		x2 := (-b - squareRoot(D)) / (2 * a)
+		x1 := (-b + math.Sqrt(D)) / (2 * a)
+		x2 := (-b - math.Sqrt(D)) / (2 * a)
 		return &x1, &x2
 	case D == 0:
 		x1 := -b / (2 * a)
