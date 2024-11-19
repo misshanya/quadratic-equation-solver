@@ -55,6 +55,7 @@ func solve(a, b, c float64) (*float64, *float64) {
 	case D == 0:
 		x1 := -b / (2 * a)
 		return &x1, nil
+	default:
+		return nil, nil
 	}
-	return nil, nil
 }
